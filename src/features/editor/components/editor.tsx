@@ -22,6 +22,11 @@ export const Editor = () => {
       initialCanvas: canvas,
       initialContainer: containerRef.current!,
     });
+
+    //fix bug to autozoom object in canvas
+    return () => {
+      canvas.dispose();
+    };
   }, [init]);
   return (
     <div className="h-full flex flex-col">
