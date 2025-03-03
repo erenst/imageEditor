@@ -1,7 +1,15 @@
 import { fabric } from "fabric";
 import * as material from "material-colors";
 
-const selectionDependentTools = [];
+export const selectionDependentTools = [
+  "fill",
+  "font",
+  "filter",
+  "opacity",
+  "remmove-bg",
+  "stroke-color",
+  "stroke-width",
+];
 
 export const colors = [
   material.red["500"],
@@ -86,6 +94,9 @@ export const DIAMON_OPTIONS = {
   height: 400,
   angle: 0,
 };
+export interface EditorHookProps {
+  clearSelectionCallback?: () => void;
+}
 export type BuildEditorProps = {
   canvas: fabric.Canvas;
   fillColor: string;
@@ -109,7 +120,7 @@ export interface Editor {
   addDiamon: () => void;
   canvas: fabric.Canvas;
   getActiveFillColor: () => string;
-  strokeColor: string;
+  getActiveStrokeColor: () => string;
   strokeWidth: number;
   selectedObjects: fabric.Object[];
 }
