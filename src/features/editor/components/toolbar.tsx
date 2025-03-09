@@ -1,7 +1,10 @@
 import { ActiveTool, Editor } from "../types";
 import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
+
+import { ArrowUp, ArrowDown } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
 
 interface ToolbarProps {
@@ -68,6 +71,28 @@ export const Toolbar = ({
             className={cn(activeTool === "stroke-width" && "bg-gray-100")}
           >
             <BsBorderWidth className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Bring forward" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => editor?.bringForward()}
+            size="icon"
+            variant="ghost"
+          >
+            <ArrowUp className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Send backward" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => editor?.sendBackward()}
+            size="icon"
+            variant="ghost"
+          >
+            <ArrowDown className="size-4" />
           </Button>
         </Hint>
       </div>
