@@ -14,6 +14,7 @@ import {
   EditorHookProps,
   STROKE_DASH_ARRAY,
   TEXT_OPTIONS,
+  FONT_FAMILY,
 } from "../types";
 import { useCanvasEvents } from "./use-canvas-events";
 import { isTextType } from "../utils";
@@ -24,6 +25,8 @@ const buildEditor = ({
   strokeColor,
   strokeWidth,
   strokeDashArray,
+  fontFamily,
+  setFontFamily,
   setStrokeDashArray,
   setFillColor,
   setStrokeColor,
@@ -102,6 +105,17 @@ const buildEditor = ({
       setStrokeDashArray(value);
       canvas.getActiveObjects().forEach((object) => {
         object.set({ strokeDashArray: value });
+      });
+      canvas.renderAll();
+    },
+    changeFontFamily: (value: string) => {
+      setFontFamily(value);
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          //@ts-ignore
+          //Faulty TS library , fontFamily exists.
+          object.set({ fontFamily: value });
+        }
       });
       canvas.renderAll();
     },
@@ -234,6 +248,16 @@ const buildEditor = ({
       const value = selectedObject.get("opacity") || 1;
       return value;
     },
+    getActiveFontFamily: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return fontFamily;
+      }
+      //@ts-ignore
+      //Faulty TS library , fontFamily exists.
+      const value = selectedObject.get("fontFamily") || fontFamily;
+      return value;
+    },
     selectedObjects,
     addText: (value, options) => {
       const object = new fabric.Textbox(value, {
@@ -251,6 +275,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
 
+  const [fontFamily, setFontFamily] = useState(FONT_FAMILY);
   const [fillColor, setFillColor] = useState(FILL_COLOR);
   const [strokeColor, setStrokeColor] = useState(STROKE_COLOR);
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
@@ -280,6 +305,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         setStrokeColor,
         setStrokeWidth,
         selectedObjects,
+        fontFamily,
+        setFontFamily,
       });
     }
 
@@ -291,6 +318,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     strokeWidth,
     selectedObjects,
     strokeDashArray,
+    fontFamily,
   ]);
 
   const init = useCallback(
