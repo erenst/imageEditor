@@ -1,4 +1,5 @@
 import { fabric } from "fabric";
+import { ITextboxOptions } from "fabric/fabric-impl";
 import * as material from "material-colors";
 
 export const selectionDependentTools = [
@@ -54,6 +55,8 @@ export const STROKE_DASH_ARRAY = [];
 export const FILL_COLOR = "rgba(0,0,0,1)";
 export const STROKE_COLOR = "rgba(0,0,0,1)";
 export const STROKE_WIDTH = 2;
+export const FONT_FAMILY = "Arial";
+export const FONT_SIZE = 32;
 
 export const CRICLE_OPTIONS = {
   radius: 225,
@@ -95,6 +98,15 @@ export const DIAMON_OPTIONS = {
   height: 400,
   angle: 0,
 };
+
+export const TEXT_OPTIONS = {
+  type: "textbox",
+  left: 100,
+  top: 100,
+  fill: FILL_COLOR,
+  fontSize: FONT_SIZE,
+  fontFamily: FONT_FAMILY,
+};
 export interface EditorHookProps {
   clearSelectionCallback?: () => void;
 }
@@ -132,4 +144,5 @@ export interface Editor {
   getActiveStrokeDashArray: () => number[];
   getActiveOpacity: () => number;
   selectedObjects: fabric.Object[];
+  addText: (value: string, options?: ITextboxOptions) => void;
 }
