@@ -78,6 +78,7 @@ export const STROKE_COLOR = "rgba(0,0,0,1)";
 export const STROKE_WIDTH = 2;
 export const FONT_FAMILY = "Arial";
 export const FONT_SIZE = 32;
+export const FONT_WEIGHT = 400;
 
 export const CRICLE_OPTIONS = {
   radius: 225,
@@ -148,6 +149,11 @@ export type BuildEditorProps = {
 
 export interface Editor {
   changeOpacity: (value: number) => void;
+  changeFontWeight: (value: number) => void;
+  changeFontStyle: (value: string) => void;
+  changeFontLinethrough: (value: boolean) => void;
+  changeFontUnderline: (value: boolean) => void;
+  changeTextAlign: (value: string) => void;
   bringForward: () => void;
   sendBackward: () => void;
   changeFillColor: (value: string) => void;
@@ -170,4 +176,9 @@ export interface Editor {
   addText: (value: string, options?: ITextboxOptions) => void;
   changeFontFamily: (value: string) => void;
   getActiveFontFamily: () => string;
+  getActiveFontWeight: () => number;
+  getActiveFontStyle: () => string;
+  getActiveFontLinethrough: () => boolean;
+  getActiveFontUnderline: () => boolean;
+  getActiveTextAlign: () => string;
 }

@@ -15,6 +15,7 @@ import {
   STROKE_DASH_ARRAY,
   TEXT_OPTIONS,
   FONT_FAMILY,
+  FONT_WEIGHT,
 } from "../types";
 import { useCanvasEvents } from "./use-canvas-events";
 import { isTextType } from "../utils";
@@ -54,6 +55,56 @@ const buildEditor = ({
     changeOpacity: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {
         object.set({ opacity: value });
+      });
+      canvas.renderAll();
+    },
+    changeFontWeight: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          //Faulty TS library , fontWeight exists.
+          object.set({ fontWeight: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontStyle: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          //Faulty TS library , fontStyle exists.
+          object.set({ fontStyle: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontLinethrough: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          //Faulty TS library , linethrough exists.
+          object.set({ linethrough: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontUnderline: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          //Faulty TS library , underline exists.
+          object.set({ underline: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeTextAlign: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          //Faulty TS library , textAlign exists.
+          object.set({ textAlign: value });
+        }
       });
       canvas.renderAll();
     },
@@ -256,6 +307,56 @@ const buildEditor = ({
       //@ts-ignore
       //Faulty TS library , fontFamily exists.
       const value = selectedObject.get("fontFamily") || fontFamily;
+      return value;
+    },
+    getActiveFontWeight: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return FONT_WEIGHT;
+      }
+      // @ts-ignore
+      //Faulty TS library , fontWeight exists.
+      const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
+      return value;
+    },
+    getActiveFontStyle: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return "normal";
+      }
+      // @ts-ignore
+      //Faulty TS library , fontStyle exists.
+      const value = selectedObject.get("fontStyle") || "normal";
+      return value;
+    },
+    getActiveFontLinethrough: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return false;
+      }
+      // @ts-ignore
+      //Faulty TS library , linethrough exists.
+      const value = selectedObject.get("linethrough") || false;
+      return value;
+    },
+    getActiveFontUnderline: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return false;
+      }
+      // @ts-ignore
+      //Faulty TS library , underline exists.
+      const value = selectedObject.get("underline") || false;
+      return value;
+    },
+    getActiveTextAlign: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return "left";
+      }
+      // @ts-ignore
+      //Faulty TS library , textAlign exists.
+      const value = selectedObject.get("textAlign") || "left";
       return value;
     },
     selectedObjects,

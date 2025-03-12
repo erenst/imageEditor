@@ -111,6 +111,7 @@ export const Editor = () => {
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}
             key={JSON.stringify(editor?.canvas.getActiveObject())}
+            // add key in order to rerender when active object is changed
           />
           <div
             className="flex-1 h-[calc(100%-124px)] bg-muted"
