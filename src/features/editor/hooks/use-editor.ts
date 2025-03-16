@@ -16,6 +16,7 @@ import {
   TEXT_OPTIONS,
   FONT_FAMILY,
   FONT_WEIGHT,
+  FONT_SIZE,
 } from "../types";
 import { useCanvasEvents } from "./use-canvas-events";
 import { isTextType } from "../utils";
@@ -104,6 +105,16 @@ const buildEditor = ({
           // @ts-ignore
           //Faulty TS library , textAlign exists.
           object.set({ textAlign: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontSize: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          //Faulty TS library , fontSize exists.
+          object.set({ fontSize: value });
         }
       });
       canvas.renderAll();
@@ -357,6 +368,16 @@ const buildEditor = ({
       // @ts-ignore
       //Faulty TS library , textAlign exists.
       const value = selectedObject.get("textAlign") || "left";
+      return value;
+    },
+    getActiveFontSize: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return FONT_SIZE;
+      }
+      // @ts-ignore
+      //Faulty TS library , fontSize exists.
+      const value = selectedObject.get("fontSize") || FONT_SIZE;
       return value;
     },
     selectedObjects,

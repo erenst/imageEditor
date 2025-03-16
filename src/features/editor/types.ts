@@ -154,6 +154,7 @@ export interface Editor {
   changeFontLinethrough: (value: boolean) => void;
   changeFontUnderline: (value: boolean) => void;
   changeTextAlign: (value: string) => void;
+  changeFontSize: (value: number) => void;
   bringForward: () => void;
   sendBackward: () => void;
   changeFillColor: (value: string) => void;
@@ -181,4 +182,5 @@ export interface Editor {
   getActiveFontLinethrough: () => boolean;
   getActiveFontUnderline: () => boolean;
   getActiveTextAlign: () => string;
+  getActiveFontSize: () => number;
 }
