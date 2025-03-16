@@ -11,6 +11,7 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
+  Trash,
 } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
 import { RxTransparencyGrid } from "react-icons/rx";
@@ -39,6 +40,7 @@ export const Toolbar = ({
   const initialFontUnderline = editor?.getActiveFontUnderline();
   const initialTextAlign = editor?.getActiveTextAlign();
   const initialFontSize = editor?.getActiveFontSize() || FONT_SIZE;
+
   const [properties, setProperties] = useState({
     fillColor: initialFillColor,
     strokeColor: initialStrokeColor,
@@ -344,6 +346,13 @@ export const Toolbar = ({
             className={cn(activeTool === "opacity" && "bg-gray-100")}
           >
             <RxTransparencyGrid className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Delete" side="bottom" sideOffset={5}>
+          <Button size="icon" variant="ghost" onClick={() => editor?.delete()}>
+            <Trash className="size-4" />
           </Button>
         </Hint>
       </div>

@@ -148,6 +148,7 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  delete: () => void;
   changeOpacity: (value: number) => void;
   changeFontWeight: (value: number) => void;
   changeFontStyle: (value: string) => void;
